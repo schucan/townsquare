@@ -11,16 +11,23 @@ body {
 
 #messageForm {
     display: flex;
+	flex-direction: column; /* Stack input fields vertically by default */
     margin-bottom: 10px;
 }
 
+#messageForm button,
 #messageForm input[type="text"],
 #messageForm input[type="text"]:focus {
     border: 1px solid #ccc;
     padding: 10px;
-    flex-grow: 1;
     margin-right: 10px;
+	margin-bottom: 10px; /* Add spacing between fields */
 }
+#messageForm input[type="text"],
+#messageForm input[type="text"]:focus {
+    flex-grow: 1;
+}
+
 
 .message-box {
     border: 4px solid #eee;
@@ -42,4 +49,21 @@ body {
 }
 #nameInput {
 	flex-grow:0 !important;
+}
+/* For wider screens, adjust form layout */
+@media (min-width: 600px) {
+    #messageForm {
+        flex-direction: row; /* Align input fields horizontally */
+    }
+
+    #messageForm button,
+	#messageForm input[type="text"],
+	#messageForm input[type="text"]:focus {
+        margin-right: 10px; /* Add spacing between the fields */
+        margin-bottom: 0; /* Remove the bottom margin */
+    }
+
+    #messageForm input[type="text"]:last-child {
+        margin-right: 0; /* Ensure the last input field has no right margin */
+    }
 }

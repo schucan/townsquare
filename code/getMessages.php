@@ -1,4 +1,8 @@
 <?php
+if (!file_exists('messages.db')){
+	require "setup.php";
+	exit;
+}
 $db = new SQLite3('messages.db');
 // This line ensures that any messages older than 5 minutes are deleted from the database on every call to getMessages.
 $db->exec("DELETE FROM messages WHERE timestamp < datetime('now', '-5 minute')");

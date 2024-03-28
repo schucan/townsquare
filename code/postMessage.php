@@ -1,4 +1,8 @@
 <?php
+if (!file_exists('messages.db')){
+	require "setup.php";
+	exit;
+}
 $db = new SQLite3('messages.db');
 $db->busyTimeout(5000); // Set a busy timeout to automatically retry for 5 seconds
 
@@ -22,7 +26,7 @@ for ($try = 0; $try < $maxTries; $try++) {
             $stmt->bindValue(':name', $name, SQLITE3_TEXT);
             $stmt->bindValue(':message', $message, SQLITE3_TEXT);
             $stmt->execute();
-
+			echo "ok";
             // If we reach here, it means the operation was successful
             break;
         }
@@ -38,4 +42,5 @@ for ($try = 0; $try < $maxTries; $try++) {
 if ($try == $maxTries) {
     // Failed to write after retrying
     // Handle this case, maybe return an error message to the user or log
+	echo "too many tries";
 }
